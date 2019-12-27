@@ -1,0 +1,51 @@
+//https://www.interviewbit.com/problems/palindrome-list/
+int lPalin(listnode* A) 
+{
+    listnode *ptr=A;
+    int count =0;
+    while(ptr!=NULL)
+    {
+        ptr=ptr->next;
+        count++;
+      
+    }
+    listnode *p;
+  ptr=A;
+  int i = 1, j;
+  while(i<=count/2)
+  {
+      p=ptr;
+      ptr=ptr->next;
+      i++;
+  }
+  listnode *curr=ptr;
+  listnode *prev=NULL;
+  listnode *next;
+  while(curr!=NULL)
+  {
+      next=curr->next;
+      curr->next=prev;
+      prev=curr;
+      curr=next;
+  }
+  p->next=prev;
+  int flag=0;
+  for(i=1;i<=count/2;i++)
+  {
+      if(A->val!=prev->val)
+      {
+          flag=1;
+          break;
+      }
+          prev=prev->next;
+          A=A->next;
+  }
+  if(flag==1)
+  {
+      return 0;
+  }
+  else 
+  {
+      return 1;
+  }
+}
