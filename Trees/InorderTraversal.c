@@ -1,20 +1,19 @@
-//https://www.interviewbit.com/problems/list-cycle/
-listnode* detectCycle(listnode* A) 
-{
-    listnode *fast = A , *slow=A;
-    while(fast!=NULL && slow!=NULL && fast->next!=NULL){
-        fast=fast->next->next;
-        slow=slow->next;
-        if(fast == slow)
+//https://www.interviewbit.com/problems/inorder-traversal/
+vector<int> Solution::inorderTraversal(TreeNode* A) {
+    vector<int> v;
+    stack <TreeNode*> s;
+    TreeNode* temp;
+    while(A || !s.empty())
+    {
+        while(A)
         {
-            slow=A;
-            while(slow !=fast)
-            {
-                slow=slow->next;
-                fast=fast->next;
-            }
-            return slow;
+            s.push(A);
+            A=A->left;
         }
+        temp=s.top();
+        s.pop();
+        v.push_back(temp->val);
+        A=temp->right;
     }
-    return NULL;
+    return v;
 }
